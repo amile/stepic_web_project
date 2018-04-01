@@ -33,8 +33,8 @@ class Question(models.Model):
 	"""docstring for Question"""
 	title = models.CharField(max_length=200)
 	text = models.TextField()
-	added_at = models.DateField(default=timezone.now)
-	rating = models.IntegerField()
+	added_at = models.DateField(blank=True, auto_now_add=True)
+	rating = models.IntegerField(default=0)
 	author = models.ForeignKey(User)
 	likes = models.ManyToManyField(User, related_name='likes')
 	objects = QuestionManager()
@@ -43,7 +43,7 @@ class Question(models.Model):
 class Answer(models.Model):
 	"""docstring for Question"""
 	text = models.TextField()
-	added_at = models.DateField(default=timezone.now)
-	rating = models.IntegerField()
+	added_at = models.DateField(blank=True, auto_now_add=True)
+	rating = models.IntegerField(default=0)
 	question = models.OneToOneField(Question)
 	author = models.ForeignKey(User)
