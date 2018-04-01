@@ -1,0 +1,4 @@
+from qa.models import Question, Answer
+from django.contrib.auth.models import User
+
+Question.objects.all()

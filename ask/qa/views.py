@@ -7,6 +7,6 @@ from django.http import HttpResponse
 def test(request, *args, **kwargs):
 	return HttpResponse('OK')
 
-def questio(request, *args, **kwargs):
+def question(request, *args, **kwargs):
 	id = kwargs['id']
 	return HttpResponse('ID: ' + id)
