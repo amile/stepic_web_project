@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+
+	</head>
+	<body>
+		<h1>Hello, I'm a question page!</h1>
+		<h2>{{ question.title }}</h2>
+		<p>{{ question.text }}</p>
+		{% for answer in question.get_answers %}
+			<ul>
+				<li>
+					<p>{{ answer }}</p>
+
+				</li>
+			</ul>
+		{% endfor %}
+	</body>
+</html>

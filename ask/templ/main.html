@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+
+	</head>
+	<body>
+		<h1>Hello, everybody!</h1>
+		<p>Page {{page.number}} of {{paginator.num_pages}}</p>
+		{% for question in questions %}
+			<ul>
+				<li>
+					<h1>{{ question.title }}</h1>
+					<a href="{% url 'question' question.id %}">More {{ question.get_absolute_url }}</a>
+
+				</li>
+			</ul>
+		{% endfor %}
+	</body>
+</html>

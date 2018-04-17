@@ -4,17 +4,19 @@ from __future__ import unicode_literals
 from django.db import models, connection
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.core.urlresolvers import reverse
 
 class QuestionManager(models.Manager):
 	"""docstring for QuestionManager"""
 
 	def new(self):
-		cursor = connection.cursor()
-		cursor.execute("""
-			SELECT title FROM qa_question ORDER BY added_at DESC
-			LIMIT 10
-		""")
-		return cursor.fetchall()
+		# cursor = connection.cursor()
+		# cursor.execute("""
+		# 	SELECT title FROM qa_question ORDER BY added_at DESC
+		# 	LIMIT 10
+		# """)
+		# return cursor.fetchall()
+		return self.order_by('-id')
 
 	def popular(self):
 		cursor = connection.cursor()
@@ -39,11 +41,17 @@ class Question(models.Model):
 	likes = models.ManyToManyField(User, related_name='likes')
 	objects = QuestionManager()
 
+	def get_answers(self):
+		return self.answer_set.all()
+		
+	def get_absolute_url(self):
+		return reverse('question', args=[str(self.id)])
+
 		
 class Answer(models.Model):
 	"""docstring for Question"""
 	text = models.TextField()
 	added_at = models.DateField(blank=True, auto_now_add=True)
 	rating = models.IntegerField(default=0)
-	question = models.OneToOneField(Question)
+	question = models.ForeignKey(Question)
 	author = models.ForeignKey(User)
