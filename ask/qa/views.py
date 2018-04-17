@@ -21,7 +21,7 @@ def new(request, *args, **kwargs):
 	except ValueError:
 		raise Http404
 	questions = Question.objects.new()
-	paginator = Paginator(questions, 10)
+	paginator = Paginator(questions, 3)
 	try:
 		page = paginator.page(page)
 	except EmptyPage: 
