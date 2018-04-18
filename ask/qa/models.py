@@ -19,16 +19,20 @@ class QuestionManager(models.Manager):
 		return self.order_by('-id')
 
 	def popular(self):
-		cursor = connection.cursor()
-		cursor.execute("""
-			SELECT qa_question.* from qa_question, 
-				(SELECT question_id, count(*) as likes 
-				FROM qa_question_likes 
-				GROUP BY question_id 
-				ORDER BY likes DESC) as t1
-			where qa_question.id = t1.question_id
-		""")
-		return cursor.fetchall()
+		# cursor = connection.cursor()
+		# cursor.execute("""
+		# 	SELECT qa_question.* from qa_question, 
+		# 		(SELECT question_id, count(*) as likes 
+		# 		FROM qa_question_likes 
+		# 		GROUP BY question_id 
+		# 		ORDER BY likes DESC) as t1
+		# 	where qa_question.id = t1.question_id
+		# """)
+		# return cursor.fetchall()
+		popular_list = self.all()[:]
+		sort = sorted(popular_list, key=lambda question: question.likes.count(), reverse=True)
+
+		return sort
 
 
 class Question(models.Model):

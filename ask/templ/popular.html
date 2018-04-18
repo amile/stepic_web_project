@@ -10,8 +10,8 @@
 			<ul>
 				<li>
 					<h1>{{ question.title }}</h1>
+					<p>{{ question.likes.count }}</p>
 					<a href="{% url 'question' question.id %}">More {{ question.get_absolute_url }}</a>
-
 				</li>
 			</ul>
 		{% endfor %}
