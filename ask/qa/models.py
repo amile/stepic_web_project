@@ -32,7 +32,7 @@ class QuestionManager(models.Manager):
 		popular_list = self.all()[:]
 		sort = sorted(popular_list, key=lambda question: question.likes.count(), reverse=True)
 
-		return sort
+		return self.order_by('-rating')
 
 
 class Question(models.Model):

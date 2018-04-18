@@ -12,8 +12,7 @@ def test(request, *args, **kwargs):
 
 def question(request, *args, **kwargs):
 	question = get_object_or_404(Question, id=kwargs['id'])
-	answers = 0
-	return render(request, 'question.html', {'question': question, 'answers': answers})
+	return render(request, 'question.html', {'question': question,})
 
 def new(request, *args, **kwargs):
 	try:

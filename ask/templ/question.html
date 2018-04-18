@@ -9,12 +9,9 @@
 		<h2>{{ question.title }}</h2>
 		<p>{{ question.text }}</p>
 		{% for answer in question.get_answers %}
-			<ul>
-				<li>
+
 					<p>{{ answer.text }}</p>
 
-				</li>
-			</ul>
 		{% endfor %}
 	</body>
 </html>
