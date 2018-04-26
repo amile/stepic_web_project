@@ -12,10 +12,10 @@ class AnswerForm(Answer):
 
 	text = forms.CharField(widget=forms.Textarea)
 	
-	def __init__(self, question, *args, **kwargs):
-		
+	def __init__(self, *args, **kwargs):
+		print args, kwargs
 		super(AnswerForm, self).__init__(*args, **kwargs)
-		self.question = question
+		self.question = args[0]
 
 	def save(self):
 		users = User.objects.all()[:]
@@ -28,11 +28,12 @@ class AnswerForm(Answer):
 
 def test():
 	question = 'Question'
-	form = AnswerForm(question)
+	form = AnswerForm()
 	return form
 
 def test1(*args, **kwargs):
-	text = kwargs.get('text')
+	# text = kwargs.get('text')
+	text = args[0]
 	print text
 
-print test()
+test()

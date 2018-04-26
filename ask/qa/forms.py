@@ -22,17 +22,18 @@ class AnswerForm(forms.Form):
 	"""docstring for AskForm"""
 
 	text = forms.CharField(widget=forms.Textarea)
+	question = forms.IntegerField()
 	
 	def __init__(self, question, *args, **kwargs):
-		
+		print question, args, kwargs
 		super(AnswerForm, self).__init__(*args, **kwargs)
-		self.question = question
+		self._question = question
 
 	def save(self):
 		users = User.objects.all()[:]
 		user = random.choice(users)
 		self.cleaned_data['author'] = user
-		self.cleaned_data['question'] = self.question
+		self.cleaned_data['question'] = self._question
 		answer = Answer(**self.cleaned_data)
 		answer.save()
 		return answer
