@@ -9,9 +9,18 @@
 		<h2>{{ question.title }}</h2>
 		<p>{{ question.text }}</p>
 		{% for answer in question.get_answers %}
-
-					<p>{{ answer.text }}</p>
-
+			<ul>
+				<li>{{ answer.text }}</li>
+					
+			</ul>
 		{% endfor %}
+		<div>{{ form.question.id }}</div>
+		<form method='post' action="{% url 'question' question.id %}">
+
+			{% csrf_token %}
+			<div>{{ form.non_field_errors }}</div>
+			{{ form.as_p }}
+			<input type='submit' value='Submit' />
+		</form>
 	</body>
 </html>

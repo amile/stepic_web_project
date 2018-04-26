@@ -2,9 +2,10 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpRequest, HttpResponse, Http404
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect, Http404
 from django.core.paginator import Paginator, EmptyPage
 from qa.models import Question, Answer
+from qa.forms import AskForm, AnswerForm
 from django.core.urlresolvers import reverse
 
 def test(request, *args, **kwargs):
@@ -12,7 +13,29 @@ def test(request, *args, **kwargs):
 
 def question(request, *args, **kwargs):
 	question = get_object_or_404(Question, id=kwargs['id'])
-	return render(request, 'question.html', {'question': question,})
+	url = question.get_absolute_url()
+	if request.method == 'POST':
+		form = AnswerForm(question, request.POST)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponseRedirect(url)
+	else:
+		form = AnswerForm(question)
+	
+	return render(request, 'question.html', {'question': question, 
+											'form': form, })
+
+def add_question(request, *args, **kwargs):
+	if request.method == 'POST':
+		form = AskForm(request.POST)
+		if form.is_valid():
+			question = form.save()
+			url = question.get_absolute_url()
+			return HttpResponseRedirect(url)
+	else:
+		form = AskForm()
+	return render(request, 'ask.html', {'form': form,})
 
 def new(request, *args, **kwargs):
 	try:
