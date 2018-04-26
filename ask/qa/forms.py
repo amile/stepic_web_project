@@ -25,9 +25,9 @@ class AnswerForm(forms.Form):
 	question = forms.IntegerField()
 	
 	def __init__(self, question, *args, **kwargs):
-		print question, args, kwargs
-		super(AnswerForm, self).__init__(*args, **kwargs)
 		self._question = question
+		super(AnswerForm, self).__init__(*args, **kwargs)
+		
 
 	def save(self):
 		users = User.objects.all()[:]

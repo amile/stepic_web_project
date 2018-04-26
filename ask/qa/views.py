@@ -16,12 +16,13 @@ def question(request, *args, **kwargs):
 	url = question.get_absolute_url()
 	if request.method == 'POST':
 
-		form = AnswerForm(question, data=request.POST)
+		form = AnswerForm(question, request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(url)
 
 	else:
+
 		form = AnswerForm(question)
 	
 	return render(request, 'question.html', {'question': question, 
