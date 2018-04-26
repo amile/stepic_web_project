@@ -15,11 +15,12 @@ def question(request, *args, **kwargs):
 	question = get_object_or_404(Question, id=kwargs['id'])
 	url = question.get_absolute_url()
 	if request.method == 'POST':
-		form = AnswerForm(question, request.POST)
 
+		form = AnswerForm(question, request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect(url)
+
 	else:
 		form = AnswerForm(question)
 	
