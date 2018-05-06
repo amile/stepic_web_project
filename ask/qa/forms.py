@@ -12,7 +12,7 @@ class AskForm(forms.Form):
 
 	def __init__(self, user, *args, **kwargs):
 		self._user = user
-		super(AnswerForm, self).__init__(*args, **kwargs)
+		super(AskForm, self).__init__(*args, **kwargs)
 
 	def save(self):
 		self.cleaned_data['author'] = self._user
