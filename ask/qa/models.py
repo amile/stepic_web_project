@@ -59,3 +59,11 @@ class Answer(models.Model):
 	rating = models.IntegerField(default=0)
 	question = models.ForeignKey(Question)
 	author = models.ForeignKey(User)
+
+
+class Session(models.Model):
+	"""docstring for Session"""
+	key = models.CharField(max_length=100, unique=True)
+	user = models.ForeignKey(User)
+	expires = models.DateTimeField(blank=True)
+		

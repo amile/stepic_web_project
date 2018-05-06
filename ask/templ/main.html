@@ -5,7 +5,8 @@
 
 	</head>
 	<body>
-		<h1>Hello, everybody!</h1>
+		<h1>Hello, {{ sessionid }}!</h1>
+		<h3>{{ user }}</h3>
 		<p>Page {{page.number}} of {{paginator.num_pages}}</p>
 		{% for question in page %}
 			<ul>

@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+	<head>
+		<title></title>
+
+	</head>
+	<body>
+		<h1>Hello, introduce yourself, please!</h1>
+		<form method='post' action='/signup/'>
+
+			{% csrf_token %}
+			<div>{{ form.non_field_errors }}</div>
+			{{ form.as_p }}
+			<input type='submit' value='Submit' />
+		</form>
+	</body>
+</html>
